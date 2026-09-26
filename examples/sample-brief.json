@@ -1,0 +1,35 @@
+{
+  "generated_at_utc": "2026-09-26T04:13:06.874014+00:00",
+  "model": "qwen3-4b-instruct-2507",
+  "source_incident": "Sample: After an inference workstation reboot, the first model response takes about 45 seconds; later responses take 2-3 seconds. GPU placement and model-load timing have not been checked. No customer outage is reported.",
+  "elapsed_ms": 4988.96,
+  "usage": {
+    "prompt_tokens": 139,
+    "completion_tokens": 234,
+    "total_tokens": 373,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "brief": {
+    "reported_facts": [
+      "After an inference workstation reboot, the first model response takes approximately 45 seconds.",
+      "Subsequent model responses take between 2 and 3 seconds.",
+      "GPU placement has not been checked.",
+      "Model-load timing has not been checked."
+    ],
+    "unknowns": [
+      "Whether GPU placement affects response times post-reboot.",
+      "Whether model-load timing contributes to the initial delay.",
+      "The exact sequence of events during startup that leads to the first response delay."
+    ],
+    "next_checks": [
+      "Verify GPU utilization and temperature during the first response after reboot using non-destructive monitoring tools.",
+      "Check for any visible or logged delays in model loading or initialization sequences without interrupting ongoing operations.",
+      "Monitor system logs for timing events related to GPU resource allocation or model initialization."
+    ],
+    "priority": "normal",
+    "handoff_note": "No customer outage is reported. Observations are limited to response time differences post-reboot; no root cause has been identified. Non-destructive checks recommended to assess hardware and software state without impacting service."
+  }
+}
+
