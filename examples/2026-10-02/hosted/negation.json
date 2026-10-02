@@ -1,0 +1,41 @@
+{
+  "generated_at_utc": "2026-10-02T12:03:48.050414+00:00",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "openai",
+  "source_incident": "Fictional: The CPU alarm threshold is 90 percent. The only captured CPU reading is 13 percent. GPU utilization was not collected. Requests continue to succeed. The operator has not approved any restart or configuration change.",
+  "elapsed_ms": 8794.23,
+  "usage": {
+    "input_tokens": 352,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 736,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 1088
+  },
+  "brief": {
+    "reported_facts": [
+      "The CPU alarm threshold is 90 percent.",
+      "The only captured CPU reading is 13 percent.",
+      "GPU utilization was not collected.",
+      "Requests continue to succeed.",
+      "The operator has not approved any restart or configuration change."
+    ],
+    "unknowns": [
+      "Current GPU utilization is unknown because it was not collected.",
+      "Whether CPU utilization exceeded 90 percent at any other time was not reported.",
+      "Whether any restart or configuration change occurred was not reported."
+    ],
+    "next_checks": [
+      "Collect a current GPU utilization reading.",
+      "Review any available CPU history to see whether other readings were captured.",
+      "Verify that requests are still succeeding.",
+      "Check audit or system logs for any restart or configuration change events."
+    ],
+    "priority": "low",
+    "handoff_note": "CPU alarm threshold is 90 percent, the only captured CPU reading is 13 percent, GPU utilization was not collected, requests continue to succeed, and the operator has not approved any restart or configuration change; please gather current GPU data, review any additional CPU history, confirm request success, and check logs for any restart or configuration change events."
+  }
+}

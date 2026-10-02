@@ -1,0 +1,40 @@
+{
+  "generated_at_utc": "2026-10-02T12:03:19.198892+00:00",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "openai",
+  "source_incident": "Fictional: After an inference workstation reboot, the first model response takes about 45 seconds; later responses take 2-3 seconds. GPU placement and model-load timing have not been checked. No customer outage is reported.",
+  "elapsed_ms": 9785.21,
+  "usage": {
+    "input_tokens": 353,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 718,
+    "output_tokens_details": {
+      "reasoning_tokens": 515
+    },
+    "total_tokens": 1071
+  },
+  "brief": {
+    "reported_facts": [
+      "After an inference workstation reboot, the first model response takes about 45 seconds.",
+      "Later model responses take 2-3 seconds.",
+      "GPU placement has not been checked.",
+      "Model-load timing has not been checked.",
+      "No customer outage is reported."
+    ],
+    "unknowns": [
+      "GPU placement on the inference workstation during the slow first response is unknown.",
+      "Model-load timing for the first response and later responses is unknown.",
+      "Whether any customer impact occurred is unknown."
+    ],
+    "next_checks": [
+      "Check current GPU placement for the model on the inference workstation.",
+      "Measure and record model-load timing for the first response after reboot and for later responses.",
+      "Review existing application, model, and system logs around the reboot and the first request timing."
+    ],
+    "priority": "normal",
+    "handoff_note": "Post-reboot behavior is a first model response of about 45 seconds followed by 2-3 second later responses, while GPU placement and model-load timing remain unchecked and no customer outage is reported."
+  }
+}
