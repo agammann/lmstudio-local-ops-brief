@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-10-02T12:02:18.726107+00:00",
+  "model": "ops-brief-qa-20261002",
+  "provider": "lmstudio",
+  "source_incident": "Fictional: After an inference workstation reboot, the first model response takes about 45 seconds; later responses take 2-3 seconds. GPU placement and model-load timing have not been checked. No customer outage is reported.",
+  "elapsed_ms": 19254.26,
+  "usage": {
+    "prompt_tokens": 274,
+    "completion_tokens": 696,
+    "total_tokens": 970,
+    "completion_tokens_details": {
+      "reasoning_tokens": 515
+    }
+  },
+  "brief": {
+    "reported_facts": [
+      "The first model response after an inference workstation reboot takes approximately 45 seconds.",
+      "Later model responses take between 2 and 3 seconds.",
+      "No customer outage is reported."
+    ],
+    "unknowns": [
+      "GPU placement has not been verified or checked.",
+      "Model-load timing has not been verified or checked."
+    ],
+    "next_checks": [
+      "Verify GPU placement using hardware configuration logs.",
+      "Review model-load timing logs to determine initialization duration."
+    ],
+    "priority": "normal",
+    "handoff_note": "After an inference workstation reboot, the first model response takes about 45 seconds; later responses take 2-3 seconds. GPU placement and model-load timing have not been checked. No customer outage is reported."
+  }
+}

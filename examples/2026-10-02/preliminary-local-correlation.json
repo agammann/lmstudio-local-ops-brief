@@ -1,0 +1,36 @@
+{
+  "generated_at_utc": "2026-10-02T11:52:38.678131+00:00",
+  "model": "ops-brief-qa-20261002",
+  "source_incident": "Fictional: At 08:00 UTC the display driver changed from version A to version B. At 08:10 UTC the API p95 latency increased from 20 ms to 80 ms. The operator has not tested whether the driver change caused the latency increase. There is no customer outage. No rollback or restart is approved.",
+  "elapsed_ms": 9510.0,
+  "usage": {
+    "prompt_tokens": 244,
+    "completion_tokens": 345,
+    "total_tokens": 589,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "brief": {
+    "reported_facts": [
+      "At 08:00 UTC, the display driver changed from version A to version B.",
+      "At 08:10 UTC, the API p95 latency increased from 20 ms to 80 ms.",
+      "The operator has not tested whether the driver change caused the latency increase.",
+      "There is no customer outage."
+    ],
+    "unknowns": [
+      "Whether the driver version change contributed to the API p95 latency increase",
+      "Whether any other system components or conditions were involved in the latency increase",
+      "The status of any pending rollback or restart actions (no approval has been granted)",
+      "The current operational impact of the driver change beyond observed latency"
+    ],
+    "next_checks": [
+      "Verify API p95 latency trends before and after 08:10 UTC using historical data.",
+      "Check system logs for any related errors, warnings, or performance events around 08:00 UTC.",
+      "Review the display driver version B release notes or known issues for potential performance impacts.",
+      "Confirm whether any other metrics (e.g., throughput, error rates) have changed post-08:00 UTC."
+    ],
+    "priority": "normal",
+    "handoff_note": "At 08:00 UTC the display driver changed from version A to version B. At 08:10 UTC the API p95 latency increased from 0 ms to 80 ms. The operator has not tested whether the driver change caused the latency increase. There is no customer outage. No rollback or restart is approved."
+  }
+}

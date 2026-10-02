@@ -1,0 +1,38 @@
+{
+  "generated_at_utc": "2026-10-02T12:02:35.359571+00:00",
+  "model": "ops-brief-qa-20261002",
+  "provider": "lmstudio",
+  "source_incident": "Fictional: The CPU alarm threshold is 90 percent. The only captured CPU reading is 13 percent. GPU utilization was not collected. Requests continue to succeed. The operator has not approved any restart or configuration change.",
+  "elapsed_ms": 7265.99,
+  "usage": {
+    "prompt_tokens": 274,
+    "completion_tokens": 263,
+    "total_tokens": 537,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "brief": {
+    "reported_facts": [
+      "The CPU alarm threshold is set at 90 percent.",
+      "The only captured CPU utilization reading is 13 percent.",
+      "GPU utilization was not collected.",
+      "Requests continue to succeed.",
+      "No operator approval has been granted for a restart or configuration change."
+    ],
+    "unknowns": [
+      "Whether GPU utilization was measured at any point during the observation period.",
+      "The current state of system performance beyond CPU and request success metrics.",
+      "Whether any underlying resource constraints exist despite low CPU usage.",
+      "Whether the absence of GPU data indicates a potential issue or omission in monitoring."
+    ],
+    "next_checks": [
+      "Verify that GPU utilization is being collected by checking monitoring configuration logs.",
+      "Review system logs for any indications of performance degradation or throttling events.",
+      "Confirm that no background processes are consuming resources beyond reported CPU usage.",
+      "Validate that the alarm threshold is correctly configured and not overridden."
+    ],
+    "priority": "normal",
+    "handoff_note": "The CPU alarm threshold is 90 percent. The only captured CPU reading is 13 percent. GPU utilization was not collected. Requests continue to succeed. The operator has not approved any restart or configuration change."
+  }
+}

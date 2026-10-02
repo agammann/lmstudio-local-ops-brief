@@ -1,0 +1,36 @@
+{
+  "generated_at_utc": "2026-10-02T12:02:27.987812+00:00",
+  "model": "ops-brief-qa-20261002",
+  "provider": "lmstudio",
+  "source_incident": "Fictional: At 08:00 UTC the display driver changed from version A to version B. At 08:10 UTC the API p95 latency increased from 20 ms to 80 ms. The operator has not tested whether the driver change caused the latency increase. There is no customer outage. No rollback or restart is approved.",
+  "elapsed_ms": 9142.72,
+  "usage": {
+    "prompt_tokens": 303,
+    "completion_tokens": 331,
+    "total_tokens": 634,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "brief": {
+    "reported_facts": [
+      "At 08:00 UTC, the display driver was updated from version A to version B.",
+      "At 08:10 UTC, the API p95 latency increased from 20 ms to 80 ms.",
+      "The operator has not tested whether the driver change caused the latency increase.",
+      "No customer outage is reported.",
+      "A rollback or restart of the display driver is not approved."
+    ],
+    "unknowns": [
+      "Whether the driver version change contributed to the API p95 latency increase",
+      "The current state of API performance beyond the p95 metric at 08:10 UTC",
+      "Whether any customer-facing service degradation occurred despite no reported outage"
+    ],
+    "next_checks": [
+      "Verify API p95 latency trends from 08:00 to 08:10 UTC using historical logs.",
+      "Check for any customer-reported performance issues or alerts in the period following 08-10 UTC.",
+      "Review system logs around 08:00 UTC for indications of driver load or initialization events."
+    ],
+    "priority": "normal",
+    "handoff_note": "At 08:00 UTC the display driver changed from version A to version B. At 08:10 UTC the API p95 latency increased from 20 ms to 80 ms. The operator has not tested whether the driver change caused the latency increase. There is no customer outage. No rollback or restart is approved."
+  }
+}

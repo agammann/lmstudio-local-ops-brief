@@ -1,0 +1,42 @@
+{
+  "generated_at_utc": "2026-10-02T12:03:38.893702+00:00",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "openai",
+  "source_incident": "Fictional: At 08:00 UTC the display driver changed from version A to version B. At 08:10 UTC the API p95 latency increased from 20 ms to 80 ms. The operator has not tested whether the driver change caused the latency increase. There is no customer outage. No rollback or restart is approved.",
+  "elapsed_ms": 19562.4,
+  "usage": {
+    "input_tokens": 376,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1778,
+    "output_tokens_details": {
+      "reasoning_tokens": 1480
+    },
+    "total_tokens": 2154
+  },
+  "brief": {
+    "reported_facts": [
+      "At 08:00 UTC the display driver changed from version A to version B.",
+      "At 08:10 UTC the API p95 latency increased from 20 ms to 80 ms.",
+      "The operator has not tested whether the driver change caused the latency increase.",
+      "There is no customer outage.",
+      "No rollback or restart is approved."
+    ],
+    "unknowns": [
+      "Whether the driver change caused the latency increase is untested.",
+      "Whether any rollback has occurred is not reported.",
+      "Whether any restart has occurred is not reported.",
+      "Whether any other recorded changes occurred between 08:00 UTC and 08:10 UTC is not reported."
+    ],
+    "next_checks": [
+      "Review change and audit records to confirm the 08:00 UTC driver version change and whether any rollback or restart has already occurred.",
+      "Review API latency data around 08:00 UTC and 08:10 UTC to confirm the timing and duration of the p95 increase.",
+      "Check whether any other recorded changes occurred between 08:00 UTC and 08:10 UTC.",
+      "Confirm the current approval status before any rollback or restart is considered."
+    ],
+    "priority": "normal",
+    "handoff_note": "At 08:00 UTC the display driver changed from version A to version B, and at 08:10 UTC the API p95 latency increased from 20 ms to 80 ms; causality has not been tested, there is no customer outage, and no rollback or restart is approved."
+  }
+}
