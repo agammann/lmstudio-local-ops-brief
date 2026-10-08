@@ -10,7 +10,7 @@ paths=git('ls-files').splitlines()
 assert all('.git' not in pathlib.PurePosixPath(p).parts and not any(part.startswith('.env') for part in pathlib.PurePosixPath(p).parts) for p in paths)
 directory=root/'release-artifacts';directory.mkdir(exist_ok=True)
 name=f'lmstudio-local-ops-brief_{VERSION}_source.zip';archive=directory/name;prefix=f'lmstudio-local-ops-brief_{VERSION}/'
-subprocess.run(['git','archive','--format=zip',f'--prefix={prefix}',f'--output={archive}',commit],cwd=root,check=True)
+subprocess.run(['git','-c','core.autocrlf=false','archive','--format=zip',f'--prefix={prefix}',f'--output={archive}',commit],cwd=root,check=True)
 with zipfile.ZipFile(archive) as package:
     assert package.testzip() is None and package.comment.decode()==commit
     files={e.filename[len(prefix):]:package.read(e) for e in package.infolist() if not e.is_dir()}
