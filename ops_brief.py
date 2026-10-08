@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
+VERSION = "1.0.0"
 
 SAMPLE_INCIDENT = (
     "Sample: After an inference workstation reboot, the first model response "
@@ -135,6 +136,7 @@ def save_result(path, rendered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--version", action="version", version=f"ops-brief {VERSION}")
     parser.add_argument("--provider", choices=("lmstudio", "openai"), default="lmstudio",
                         help="local LM Studio by default; openai explicitly sends the note to OpenAI")
     parser.add_argument("--model", help="LM Studio model identifier; hosted mode uses gpt-5.4")
