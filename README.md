@@ -8,6 +8,23 @@ This project complements [RTX Local LLM Lab](https://github.com/agammann/rtx-loc
 
 ## Run locally
 
+Download `lmstudio-local-ops-brief_1.0.0_source.zip` and `SHA256SUMS` from the [v1.0.0 release](https://github.com/agammann/lmstudio-local-ops-brief/releases/tag/v1.0.0), compare the ZIP's SHA-256 digest, and extract it. In PowerShell:
+
+```powershell
+Get-FileHash .\lmstudio-local-ops-brief_1.0.0_source.zip -Algorithm SHA256
+Expand-Archive .\lmstudio-local-ops-brief_1.0.0_source.zip -DestinationPath .\ops-brief
+cd .\ops-brief\lmstudio-local-ops-brief_1.0.0
+python .\ops_brief.py --version
+python .\ops_brief.py --help
+```
+
+Developers can instead clone the pinned tag:
+
+```powershell
+git clone --branch v1.0.0 --depth 1 https://github.com/agammann/lmstudio-local-ops-brief.git
+cd .\lmstudio-local-ops-brief
+```
+
 Requirements: Python 3.10+ and [LM Studio](https://lmstudio.ai/) with its `lms` CLI available. No Python packages are required.
 
 Download Qwen3 4B Instruct Q4_K_M if it is not already installed, then load it and start a loopback server:
@@ -68,11 +85,25 @@ Schema validation establishes structure, not truth. Check every observation and 
 
 ## Verification and examples
 
+See the [v1 release checks](RELEASE_VERIFICATION.md) for the current source ZIP and first local/hosted requests. The earlier results below retain their original dates.
+
 ```powershell
 python -m unittest -v
 ```
 
 The suite covers schema validation, incomplete output, input limits, credential boundaries, actual HTTP redirect rejection, and preserving an existing file when a save fails. Real local and hosted runs are documented separately in [VERIFICATION.md](VERIFICATION.md), with captured responses for four fictional cases.
+
+## Keep, recover and update
+
+Saved `brief.json` files contain the full source note. Keep them outside the extracted application folder, open them in a text editor to review the source beside the draft, and copy them to your normal backup location. Restore by copying the saved JSON back; this CLI has no separate account or hidden workspace database.
+
+If a local request fails, check `lms ps` and `lms server status`, confirm the identifier and loopback port, and try a shorter note. An input, model or save failure preserves an existing output file. Hosted errors identify authentication, connection or completion failure without automatic retries. Keep the existing result until a new draft has been reviewed.
+
+For an update, extract the new release into a new folder, verify its checksum and `--version`, run `python -m unittest -v`, and retain your saved briefs before switching. Remove the old application folder when satisfied. Stop only the LM Studio model/server you started; model downloads live in LM Studio's separate model library.
+
+To change the implementation, edit `ops_brief.py` and run the existing unit suite. From a clean committed Git checkout, `python scripts/package-release.py` creates the source ZIP and `python scripts/check-consumer.py` verifies a fresh extraction. Windows and Ubuntu CI cover Python 3.10 and 3.14. Report a reproducible problem through [GitHub Issues](https://github.com/agammann/lmstudio-local-ops-brief/issues), including the version and redacted error; omit API keys and private operations notes.
+
+The source is [MIT licensed](LICENSE). Model weights are separate downloads governed by their own licenses.
 
 The [original sample](examples/sample-brief.json) is a historical local response from September 26, 2026. It predates the provider field and current verification; its timing is not a performance guarantee.
 
