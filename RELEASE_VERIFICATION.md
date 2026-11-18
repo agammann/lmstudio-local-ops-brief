@@ -1,4 +1,12 @@
-# Version 1.0.0 verification
+# Release verification
+
+## Version 1.0.1 checks — November 17, 2026
+
+Python 3.12.14 passed the version/help commands and all 14 unit tests. The new transport regressions inspect opener construction using synthetic arguments. Local IPv4, localhost and IPv6 requests explicitly disable automatic proxy resolution, while hosted requests retain the default proxy selection. Both keep redirect rejection. These construction checks send no HTTP request.
+
+The existing suite covers schema and input validation, incomplete responses, hidden-key boundaries, the owned HTTP redirect fixture and preservation of an earlier file after a failed save. Earlier model responses and their quality limits remain recorded below and in VERIFICATION.md.
+
+## Version 1.0.0 verification
 
 The current source was tested on Windows with Python 3.12.14 and LM Studio 0.4.25. Twelve unit tests passed. A fresh source ZIP extracted into a path containing spaces also passed the unit suite, version/help commands and rejection of an empty note without replacing the previous saved JSON. The release workflow checks Python 3.10 and 3.14 on Windows and Ubuntu before publishing the source and its checksums.
 

@@ -8,12 +8,12 @@ This project complements [RTX Local LLM Lab](https://github.com/agammann/rtx-loc
 
 ## Run locally
 
-Download `lmstudio-local-ops-brief_1.0.0_source.zip` and `SHA256SUMS` from the [v1.0.0 release](https://github.com/agammann/lmstudio-local-ops-brief/releases/tag/v1.0.0), compare the ZIP's SHA-256 digest, and extract it. In PowerShell:
+Download `lmstudio-local-ops-brief_1.0.1_source.zip` and `SHA256SUMS` from the [v1.0.1 release](https://github.com/agammann/lmstudio-local-ops-brief/releases/tag/v1.0.1), compare the ZIP's SHA-256 digest, and extract it. In PowerShell:
 
 ```powershell
-Get-FileHash .\lmstudio-local-ops-brief_1.0.0_source.zip -Algorithm SHA256
-Expand-Archive .\lmstudio-local-ops-brief_1.0.0_source.zip -DestinationPath .\ops-brief
-cd .\ops-brief\lmstudio-local-ops-brief_1.0.0
+Get-FileHash .\lmstudio-local-ops-brief_1.0.1_source.zip -Algorithm SHA256
+Expand-Archive .\lmstudio-local-ops-brief_1.0.1_source.zip -DestinationPath .\ops-brief
+cd .\ops-brief\lmstudio-local-ops-brief_1.0.1
 python .\ops_brief.py --version
 python .\ops_brief.py --help
 ```
@@ -21,7 +21,7 @@ python .\ops_brief.py --help
 Developers can instead clone the pinned tag:
 
 ```powershell
-git clone --branch v1.0.0 --depth 1 https://github.com/agammann/lmstudio-local-ops-brief.git
+git clone --branch v1.0.1 --depth 1 https://github.com/agammann/lmstudio-local-ops-brief.git
 cd .\lmstudio-local-ops-brief
 ```
 
@@ -42,9 +42,9 @@ The default note is fictional. To use your own note and save the result:
 python .\ops_brief.py --model ops-brief --incident "API p95 latency rose from 20 ms to 80 ms at 08:10 UTC. The cause has not been tested." --output .\brief.json
 ```
 
-Use the exact identifier shown by `lms ps` if you already have a model loaded. Another instruction model may work if it supports LM Studio structured output. Hardware requirements and generation quality vary; the local mode is experimental.
+Use the exact identifier shown by `lms ps` if you already have a model loaded. Another instruction model may work if it supports LM Studio structured output. Hardware requirements vary. The tested local 4B model can change numbers or treat known facts as unknowns, so compare every brief with its source.
 
-Only local HTTP destinations (`127.0.0.1`, `localhost`, or `::1`) are accepted in this mode. The script does not send the note or an API key to OpenAI unless you explicitly select the hosted provider. Downloading model weights requires a separate network connection.
+Only local HTTP destinations (`127.0.0.1`, `localhost`, or `::1`) are accepted in this mode. Local requests bypass automatic proxy configuration and reject redirects. The script does not send the note or an API key to OpenAI unless you explicitly select the hosted provider. Downloading model weights requires a separate network connection.
 
 When finished with the model and server you started:
 
@@ -63,7 +63,7 @@ In an interactive terminal, enter your OpenAI API key at the hidden prompt. The 
 
 Hosted mode sends the complete supplied note to the fixed OpenAI Responses API endpoint using **GPT-5.4 with high reasoning**. It uses your API account and billing, sets `store: false`, and makes one request without automatic retries or provider fallback. `store: false` controls response storage; it does not make the request local. Use `--incident` to replace the same fictional default note shown in local mode.
 
-The project supplies no shared key. `--url` applies only to LM Studio; hosted mode rejects a custom destination or a different model name. Keys are excluded from saved results and error messages. An invalid key produces an HTTP 401 error without replacing an existing result.
+Hosted mode retains Python's usual proxy configuration. The project supplies no shared key. `--url` applies only to LM Studio; hosted mode rejects a custom destination or a different model name. Keys are excluded from saved results and error messages. An invalid key produces an HTTP 401 error without replacing an existing result.
 
 ## Output and failure behavior
 
