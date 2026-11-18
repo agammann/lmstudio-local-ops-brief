@@ -6,11 +6,12 @@ import json
 import os
 import tempfile
 import threading
+import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from unittest.mock import patch
 
-from ops_brief import main, post_json, response_content, save_result, validate_brief
+from ops_brief import NoRedirects, main, post_json, response_content, save_result, validate_brief
 
 
 class BriefValidationTests(unittest.TestCase):
@@ -113,6 +114,25 @@ class BriefValidationTests(unittest.TestCase):
                 main()
             self.assertEqual(result.exception.code, 2)
             send.assert_not_called()
+
+    def test_local_opener_disables_automatic_proxy_resolution(self):
+        for url in ("http://127.0.0.1:1234", "http://localhost:1234", "http://[::1]:1234"):
+            with self.subTest(url=url), patch("ops_brief.urllib.request.build_opener") as build:
+                build.return_value.open.return_value.__enter__.return_value.read.return_value = b'{}'
+                self.assertEqual(post_json(url, "/v1/chat/completions", {}), {})
+                handlers = build.call_args.args
+                self.assertEqual([handler.proxies for handler in handlers
+                                  if isinstance(handler, urllib.request.ProxyHandler)], [{}])
+                self.assertTrue(any(isinstance(handler, NoRedirects) for handler in handlers))
+
+    def test_hosted_opener_preserves_default_proxy_selection(self):
+        with patch("ops_brief.urllib.request.build_opener") as build:
+            build.return_value.open.return_value.__enter__.return_value.read.return_value = b'{}'
+            self.assertEqual(post_json("https://api.openai.com", "/v1/responses", {},
+                                      api_key="fixture-visitor-key"), {})
+            handlers = build.call_args.args
+            self.assertFalse(any(isinstance(handler, urllib.request.ProxyHandler) for handler in handlers))
+            self.assertTrue(any(isinstance(handler, NoRedirects) for handler in handlers))
 
     def test_rejects_redirect_without_requesting_its_destination(self):
         paths = []

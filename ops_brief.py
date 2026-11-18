@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 SAMPLE_INCIDENT = (
     "Sample: After an inference workstation reboot, the first model response "
@@ -87,7 +87,10 @@ def post_json(base_url, path, payload, api_key=None):
         data=json.dumps(payload).encode("utf-8"),
         headers=headers,
     )
-    with urllib.request.build_opener(NoRedirects()).open(request, timeout=180) as response:
+    handlers = [NoRedirects()]
+    if urlparse(base_url).hostname in {"127.0.0.1", "localhost", "::1"}:
+        handlers.insert(0, urllib.request.ProxyHandler({}))
+    with urllib.request.build_opener(*handlers).open(request, timeout=180) as response:
         raw = response.read(131073)
     if len(raw) > 131072:
         raise ValueError("API response exceeds 128 KiB")

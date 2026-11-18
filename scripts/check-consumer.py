@@ -21,4 +21,4 @@ with tempfile.TemporaryDirectory(prefix='ops brief consumer ') as temporary:
     saved=source/'previous.json';saved.write_text('previous saved brief',encoding='utf-8')
     result=subprocess.run([sys.executable,'ops_brief.py','--model','fixture','--incident',' ','--output',str(saved)],cwd=source,capture_output=True,text=True)
     assert result.returncode==2 and saved.read_text(encoding='utf-8')=='previous saved brief'
-print('Fresh source ZIP: twelve tests, help/version and rejected-input preservation passed.')
+print('Fresh source ZIP: unit tests, help/version and rejected-input preservation passed.')
